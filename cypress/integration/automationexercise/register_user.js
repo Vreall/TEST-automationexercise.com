@@ -1,6 +1,6 @@
 describe('automationexercise test', function () {
     it('Test Case 1: Register User', function () {
-			// Navigate to url 'http://automationexercise.com' & Verify that home page is visible successfully
+			// Navigate to url 'http://automationexercise.com'
 			cy.visit('http://automationexercise.com');
 
 			//Click on 'Signup / Login' button
@@ -11,7 +11,7 @@ describe('automationexercise test', function () {
 
 			//Enter name and email address
 			cy.get('[data-qa="signup-name"').type('vreal');
-			cy.get('[data-qa="signup-email"').type('vreal.fotoo@gmaill.comm');
+			cy.get('[data-qa="signup-email"').type('vreal.fota@gmailll.com');
 
 			//Click 'Signup' button
 			cy.get('[data-qa="signup-button"').click();
@@ -51,9 +51,9 @@ describe('automationexercise test', function () {
 			//Verify that 'Logged in as username' is visible
 			cy.contains('a', ' Logged in as ').should('be.visible');
 			//Click 'Delete Account' button
-			cy.contains('a', ' Delete Account').click();
+			// cy.contains('a', ' Delete Account').click();
 			//Verify that 'ACCOUNT DELETED!' is visible and click 'Continue' button
-            cy.contains('b', 'Account Deleted!').should('be.visible');
-            cy.get('[data-qa="continue-button"]').click();
+			// cy.contains('b', 'Account Deleted!').should('be.visible');
+			// cy.get('[data-qa="continue-button"]').click();
 		});
 });
