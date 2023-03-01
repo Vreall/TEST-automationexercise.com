@@ -1,21 +1,31 @@
 /// <reference types="Cypress" />
 describe('automationexercise test', function () {
-	it('Verify Subscription in cart', function () {
+	it('Add Products in Cart', function () {
 		// Navigate to url 'http://automationexercise.com'
 		cy.visit('http://automationexercise.com');
 
-		// Click 'Cart' button
-		cy.contains('a', ' Cart').click();
-		// Scroll down to footer
-		cy.scrollTo('bottom');
-		// Verify text 'SUBSCRIPTION'
-		cy.contains('footer h2', 'Subscription').should('be.visible');
-		// Enter email address in input and click arrow button
-		cy.get('footer input[type="email"]').type('mail@wp.pl');
-		cy.get('footer button[type="submit"]').click();
-		// Verify success message 'You have been successfully subscribed!' is visible
-		cy.contains('div', 'You have been successfully subscribed!').should(
-			'be.visible'
-		);
+		// Click 'Products' button
+		cy.contains('a', ' Products').click();
+		// Hover over first product and click 'Add to cart'
+		cy.get('div[class="product-image-wrapper"').eq(0).realHover('mouse');
+		cy.wait(2000);
+		cy.contains(
+			'div[class="overlay-content"] a[data-product-id="1"]',
+			'Add to cart'
+		).click({ waitForAnimations: false });
+		// Click 'Continue Shopping' button
+		cy.get('[data-dismiss="modal"]').click();
+		// Hover over second product and click 'Add to cart'
+		cy.get('div[class="product-image-wrapper"').eq(1).realHover('mouse');
+		cy.wait(2000);
+		cy.contains(
+			'div[class="overlay-content"] a[data-product-id="2"]',
+			'Add to cart'
+		).click({ waitForAnimations: false });
+		// Click 'View Cart' button
+		cy.contains('a', 'View Cart').click();
+		// Verify both products are added to Cart
+		cy.get('tbody').children().should('have.length', '2');
+		// Verify their prices, quantity and total price
 	});
 });
