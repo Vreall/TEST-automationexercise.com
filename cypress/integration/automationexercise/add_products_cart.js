@@ -27,5 +27,17 @@ describe('automationexercise test', function () {
 		// Verify both products are added to Cart
 		cy.get('tbody').children().should('have.length', '2');
 		// Verify their prices, quantity and total price
+		cy.get('#product-1>td.cart_price>p').should('have.text', 'Rs. 500');
+		cy.get('#product-1>td.cart_quantity>button').should('have.text', '1');
+		cy.get('#product-1>td.cart_total>p.cart_total_price').should(
+			'have.text',
+			'Rs. 500'
+		);
+		cy.get('#product-2>td.cart_price>p').should('have.text', 'Rs. 400');
+		cy.get('#product-2>td.cart_quantity>button').should('have.text', '1');
+		cy.get('#product-2>td.cart_total>p.cart_total_price').should(
+			'have.text',
+			'Rs. 400'
+		);
 	});
 });
