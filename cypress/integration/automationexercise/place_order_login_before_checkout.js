@@ -1,49 +1,18 @@
 /// <reference types="Cypress" />
 describe('automationexercise test', function () {
-	it('Place Order: Register before Checkout', function () {
+	it('Place Order: Login before Checkout', function () {
 		// Navigate to url 'http://automationexercise.com'
 		cy.visit('http://automationexercise.com');
 
-		// Click 'Register / Login' button
+		// Click 'Signup / Login' button
 		cy.contains('a', ' Signup / Login').click();
-		// Fill all details in Signup and create account
-		//Enter name and email address
-		cy.get('[data-qa="signup-name"').type('vreal');
-		cy.get('[data-qa="signup-email"').type('vreal.fota@gmailll.com');
 
-		//Click 'Signup' button
-		cy.get('[data-qa="signup-button"').click();
+		//Fill email, password and click 'Login' button
+		cy.get('[data-qa="login-email"]').type('vreal.fota@gmailll.com');
+		cy.get('[data-qa="login-password"]').type('haslo123');
 
-		//Verify that 'ENTER ACCOUNT INFORMATION' is visible
-		cy.contains('b', 'Enter Account Information').should('be.visible');
-
-		//Fill details: Title, Name, Email, Password, Date of birth
-		cy.get('input[value="Mr"]').check();
-		cy.get('[data-qa="password"]').type('haslo123');
-		cy.get('[data-qa="days"]').select('7');
-		cy.get('[data-qa="months"]').select('11');
-		cy.get('[data-qa="years"]').select('1995');
-		//Select checkbox 'Sign up for our newsletter!'
-		cy.get('#newsletter').check();
-		//Select checkbox 'Receive special offers from our partners!'
-		cy.get('#optin').check();
-		//Fill details: First name, Last name, Company, Address, Address2, Country, State, City, Zipcode, Mobile Number
-		cy.get('[data-qa="first_name"]').type('Marek');
-		cy.get('[data-qa="last_name"]').type('Kowalski');
-		cy.get('[data-qa="company"]').type('It factory');
-		cy.get('[data-qa="address"]').type('Long Street 20c/10');
-		cy.get('[data-qa="country"]').select('United States');
-		cy.get('[data-qa="state"]').type('Florida');
-		cy.get('[data-qa="city"]').type('Miami');
-		cy.get('[data-qa="zipcode"]').type('33101');
-		cy.get('[data-qa="mobile_number"]').type('123456789');
-
-		//Click 'Create Account button'
-		cy.get('[data-qa="create-account"]').click();
-		//Verify that 'ACCOUNT CREATED!' is visible
-		cy.contains('b', 'Account Created!').should('be.visible');
-		//Click 'Continue' button
-		cy.get('[data-qa="continue-button"]').click();
+		//Click 'Login' button
+		cy.get('[data-qa="login-button"]').click();
 
 		//Verify that 'Logged in as username' is visible
 		cy.contains('a', ' Logged in as ').should('be.visible');
@@ -63,8 +32,11 @@ describe('automationexercise test', function () {
 		).click({ waitForAnimations: false });
 		// Click 'Cart' button
 		cy.contains('a', ' Cart').click();
+		// Verify that cart page is displayed
+		cy.url().should('include', '/view_cart');
 		// Click 'Proceed To Checkout' button
 		cy.contains('a', 'Proceed To Checkout').click();
+
 		// Verify Address Details and Review Your Order
 		cy.get('ul#address_delivery > li.address_firstname').should(
 			'include.text',
